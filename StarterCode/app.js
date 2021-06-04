@@ -1,5 +1,5 @@
 let url = 'StarterCode/Data/samples.json'
-// getting data from the json file
+// Extract json data
 d3.json(url).then(function(data){
     console.log(data)
 
@@ -9,16 +9,16 @@ d3.json(url).then(function(data){
         d3.select('#selDataset').append('option').text(d).property('value',d)
     })
   
-    // Getting the top 10 sample values
+    // Retrieve sample values
     let values = data.samples[0].sample_values.slice(0, 10).reverse()
   
-    // get only top 10 otu ids for the plot OTU and reversing it. 
+    // Just retrieve top 10 OTU ids for the plot OTU and reverse. 
     let ids = data.samples[0].otu_ids.slice(0, 10).map(d => `OTU ${d}`)
         
-    // Get the top 10 labels for the plot
+    // Top 10 labels for the plot
     let labels = data.samples[0].otu_labels.slice(0,10)
    
-    // create trace for the plot
+    // Make trace for the plot
     let trace = {
         x: values,
         y: ids,
@@ -30,7 +30,7 @@ d3.json(url).then(function(data){
     // Connect trace data 
     let plotData = [trace]
 
-    // Create the bar plot
+    // Create bar plot
     Plotly.newPlot('bar',plotData)
       
     // Static bubble chart
@@ -39,7 +39,7 @@ d3.json(url).then(function(data){
     let bubbleIds = data.samples[0].otu_ids
     let bubbleLabels = data.samples[0].otu_labels
 
-    // Create trace for the plot
+    // Create trace for plot
     let traceBubble = {
       x: bubbleIds,
       y: bubbleValues,
@@ -59,7 +59,7 @@ d3.json(url).then(function(data){
       xaxis: { title: "OTU ID"}
     };  
         
-      // Create the bubble plot
+      // Create bubble plot
       Plotly.newPlot('bubble', dataBubble, layoutBubble);
   
       // Static Demographics
@@ -130,11 +130,11 @@ d3.json(url).then(function(data){
         font: { color: "#404040", family: "Times New Roman" }
       };
 
-      // Create the Gauge plot
+      // Create Gauge plot
       Plotly.newPlot("gauge", dataGauge, layoutGauge);
   })
 
-// read the json file to get data
+// read json file to retrieve data
 d3.json(url).then(function(data){
 
     let input = d3.select('#selDataset')
@@ -146,7 +146,7 @@ d3.json(url).then(function(data){
         let ids2 = data.samples.filter(d=> d.id == newText)[0].otu_ids.slice(0,10).map(d => `OTU ${d}`)
         let labels2 = data.samples.filter(d=> d.id == newText)[0].otu_labels.slice(0,10)
 
-        // Create trace for the plot
+        // Create trace for plot
         let trace2 = {
             x: values2,
             y: ids2,
@@ -184,7 +184,7 @@ d3.json(url).then(function(data){
           xaxis: { title: "OTU ID"}
         };  
 
-        // Create the dynamic Bubble Chart
+        // Create dynamic Bubble Chart
         Plotly.newPlot('bubble', dataBubble2, layoutBubble2);
 
         // Dynamic Demographics
